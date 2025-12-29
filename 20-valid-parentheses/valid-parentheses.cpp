@@ -9,20 +9,21 @@ public:
             if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
                 st.push(s[i]);
             } else {
-                if (!st.empty()) {
-                    if (s[i] == ')' && st.top() == '(') {
-                        st.pop();
-                    } else if (s[i] == '}' && st.top() == '{') {
-                        st.pop();
-                    } else if (s[i] == ']' && st.top() == '[') {
-                        st.pop();
-                    } else
-                        return false;
-
-                } else
+                if (st.empty()) {
                     return false;
+                }
+                char ch = st.top();
+                st.pop();
+                if (s[i] == ')' && ch != '(') {
+                    return false;
+                } else if (s[i] == '}' && ch != '{') {
+                    return false;
+                } else if (s[i] == ']' && ch != '[') {
+                    return false;
+                }
             }
         }
         return st.empty();
     }
+    
 };
