@@ -36,13 +36,8 @@ public:
         }
 
         for (int i = 0; i < s; i++) {
-            // minn = (i-left[i])*(right[i]-i);
             n = (right[i] - left[i] + 1);
-            // if((left[i]==-1||right[i]==s)&&n>s){
-            //     n = s;
-            // }
             area = max(area, n * heights[i]);
-            cout << area << endl;
         }
 
         return area;
