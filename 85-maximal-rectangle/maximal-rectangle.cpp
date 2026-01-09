@@ -1,6 +1,8 @@
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
+        if (matrix.empty() || matrix[0].empty())
+            return 0;
         stack<int> st;
         int rows = matrix.size();
         int cols = matrix[0].size();
@@ -54,11 +56,10 @@ public:
                 area = max(area, n * nums[i][k]);
             }
 
-            st = {};
-            left.clear();
-            right.clear();
-            left.assign(cols, 0);
-            right.assign(cols, cols - 1);
+            while (!st.empty())
+                st.pop();
+            fill(left.begin(), left.end(), 0);
+            fill(right.begin(), right.end(), cols - 1);
         }
         return area;
     }
