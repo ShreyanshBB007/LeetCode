@@ -5,35 +5,32 @@ public:
             return 1;
         }
         int flag;
-        int count;
+        int count = 2;
         int k = 1;
-        while(k<nums.size()){
-            if(nums[k]-nums[k-1]==0){
+        while (k < nums.size()) {
+            if (nums[k] == nums[k - 1]) {
                 k++;
-                if(k==nums.size()){
+                if (k == nums.size()) {
                     return 1;
                 }
                 continue;
             }
-            if (nums[k] - nums[k-1] > 0) {
-                    flag = -1;
-                    count = 2;
-
-                } else {
-                    flag = 1;
-                    count = 2;
-
-                }
+            if (nums[k] - nums[k - 1] > 0) {
+                flag = -1;
+            } else {
+                flag = 1;
+            }
             break;
         }
 
-        for (int i = k+1; i < nums.size(); i++) {
-            if (nums[i] == nums[i-1]) continue;
+        for (int i = k + 1; i < nums.size(); i++) {
+            if (nums[i] == nums[i - 1])
+                continue;
             if (flag * (nums[i] - nums[i - 1]) > 0) {
                 flag *= -1;
                 count++;
             } else {
-                if (nums[i] - nums[i-1] > 0) {
+                if (nums[i] - nums[i - 1] > 0) {
                     flag = -1;
                 } else {
                     flag = 1;
