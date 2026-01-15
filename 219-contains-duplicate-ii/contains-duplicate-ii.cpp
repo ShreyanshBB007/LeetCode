@@ -4,15 +4,15 @@ public:
         if(nums.size()==1){
             return false;
         }
-        int j = 1;
+        unordered_map<int,pair<int,int>>mp;
         for(int i = 0; i < nums.size(); i++){
-            j = i + 1;
-            while(j<nums.size()&&j<=i+k){
-                if(nums[i]==nums[j]){
+            mp[nums[i]].first++;
+            if(mp[nums[i]].first>1){
+                if(abs(mp[nums[i]].second-i)<=k){
                     return true;
                 }
-                j++;
             }
+            mp[nums[i]].second = i;
         }
         return false;
     }
