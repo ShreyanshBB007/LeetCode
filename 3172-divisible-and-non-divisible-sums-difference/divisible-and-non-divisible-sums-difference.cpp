@@ -6,14 +6,9 @@ public:
         for (int i = 1; i <= n; i++) {
             if (i % m != 0) {
                 num1 += i;
-            }
-        }
-        for (int i = 1; i <= n; i++) {
-            if (i % m == 0) {
+            } else
                 num2 += i;
-            }
         }
-        cout<<num1<<" "<<num2;
         return num1 - num2;
     }
 };
