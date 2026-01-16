@@ -1,24 +1,33 @@
 class Solution {
 public:
+    bool isPrime(int x) {
+        if (x < 2) return false;
+        for (int i = 2; i * i <= x; i++) {
+            if (x % i == 0) return false;
+        }
+        return true;
+    }
+
     int sumFourDivisors(vector<int>& nums) {
-        int sum = 0;
-        int count = 0;
         int ans = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            sum = nums[i] + 1;
-            count = 2;
-            for (int j = 2; j * j <= nums[i]; j++) {
-                if (nums[i] % j == 0) {
-                    if (j * j == nums[i]) {
-                        count += 1;
-                    } else {
-                        count+=2;
-                    }
-                    sum += j + (nums[i] / j);
-                }
+
+        for (int n : nums) {
+            // Case 1: n = p^3
+            int p = round(cbrt(n));
+            if (p * p * p == n && isPrime(p)) {
+                ans += 1 + p + p * p + n;
+                continue;
             }
-            if(count==4){
-                ans += sum;
+
+            // Case 2: n = p * q (p != q, both prime)
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
+                    int q = n / i;
+                    if (i != q && isPrime(i) && isPrime(q)) {
+                        ans += 1 + i + q + n;
+                    }
+                    break; // stop after first factor
+                }
             }
         }
         return ans;
