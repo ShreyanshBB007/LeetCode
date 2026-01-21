@@ -1,10 +1,20 @@
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     int minOperations(vector<int>& nums, vector<int>& target) {
-        unordered_set<int> us;
-        for(int i = 0; i < nums.size(); i++) {
-            if(nums[i] != target[i]) us.insert(nums[i]);
+        bool seen[100001] = {false};
+        int count = 0;
+        int n = nums.size();
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] != target[i]) {
+                if (!seen[nums[i]]) {
+                    seen[nums[i]] = true;
+                    count++;
+                }
+            }
         }
-        return us.size();
+        return count;
     }
 };
