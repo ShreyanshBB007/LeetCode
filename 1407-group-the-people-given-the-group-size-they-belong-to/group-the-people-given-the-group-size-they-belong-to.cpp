@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
         int maxx = *max_element(groupSizes.begin(), groupSizes.end());
-        vector<vector<int>> vec(maxx+maxx);
+        vector<vector<int>> vec(maxx+1);
 
         for(int i = 0; i<groupSizes.size(); i++){
             vec[groupSizes[i]].push_back(i);
