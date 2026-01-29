@@ -5,7 +5,7 @@ public:
         int right = 0;
         int maxlen = 0;
         unordered_set<int> s;
-        vector<int> freq(fruits.size(), 0);
+        unordered_map<int, int> freq;
 
         while (right < fruits.size()) {
             freq[fruits[right]]++;
