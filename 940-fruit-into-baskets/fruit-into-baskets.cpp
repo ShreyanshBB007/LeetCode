@@ -4,16 +4,14 @@ public:
         int left = 0;
         int right = 0;
         int maxlen = 0;
-        unordered_set<int> s;
         unordered_map<int, int> freq;
 
         while (right < fruits.size()) {
             freq[fruits[right]]++;
-            s.insert(fruits[right]);
-            while(s.size() > 2) {
+            while(freq.size() > 2) {
                 freq[fruits[left]]--;
                 if (freq[fruits[left]] == 0) {
-                    s.erase(fruits[left]);
+                    freq.erase(fruits[left]);
                 }
                 left++;
             }
