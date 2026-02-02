@@ -1,15 +1,12 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int n = s.size();
-        int left = 0, ans = 0;
-        int count[3] = {0, 0, 0};
-        for (int right = 0; right < n; right++) {
-            count[s[right] - 'a']++;
-            while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
-                ans += n - right;
-                count[s[left] - 'a']--;
-                left++;
+        int cnt[3] = {0}, left = 0, ans = 0;
+        for (int right = 0; right < s.size(); right++) {
+            cnt[s[right] - 'a']++;
+            while (cnt[0] && cnt[1] && cnt[2]) {
+                ans += s.size() - right;
+                cnt[s[left++] - 'a']--;
             }
         }
         return ans;
