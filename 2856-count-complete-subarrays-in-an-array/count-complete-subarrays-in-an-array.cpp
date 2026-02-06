@@ -1,39 +1,26 @@
 class Solution {
 public:
-    unordered_map<int, int> mpp;
-    int atMost(vector<int>& nums, int k) {
+    int countCompleteSubarrays(vector<int>& nums) {
         int n = nums.size();
-        int left = 0;
-        int right = 0;
-        int scount = 0;
         int ans = 0;
+        unordered_map<int,int> mpp;
+        for(int i = 0;i<nums.size();i++){
+            mpp[nums[i]]++;
+        }
+        int distinct = mpp.size();
+        int l = 0;
+        int r = 0;
         mpp.clear();
-        while (right < nums.size()) {
-            mpp[nums[right]]++;
-            if (mpp[nums[right]] == 1) {
-                scount++;
+        while(r < n){
+            mpp[nums[r]]++;
+            while(mpp.size() == distinct) {
+                ans += n-r;
+                mpp[nums[l]]--;
+                if(mpp[nums[l]] == 0) mpp.erase(nums[l]);
+                l++;
             }
-            while (scount > k) {
-                mpp[nums[left]]--;
-                if (mpp[nums[left]] == 0) {
-                    scount--;
-                }
-                left++;
-            }
-            ans+=(right-left+1);
-            right++;
+            r++;
         }
         return ans;
-    }
-    int countCompleteSubarrays(vector<int>& nums) {
-        int k = 0;
-        mpp.clear();
-        for (int i = 0; i < nums.size(); i++) {
-            mpp[nums[i]]++;
-            if (mpp[nums[i]] == 1) {
-                k++;
-            }
-        }
-        return atMost(nums, k) - atMost(nums, k - 1);
     }
 };
