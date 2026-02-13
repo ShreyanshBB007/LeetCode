@@ -1,21 +1,16 @@
 class Solution:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
-        import pprint
+        from collections import defaultdict
+        
         sdict = defaultdict(int)
+        
         for s in cpdomains:
-            rep, domain = s.split(" ", 1)
-            sdict[domain] += int(rep)
-            while domain:
-                try:
-                    _ , domain = domain.split(".", 1)
-                    sdict[domain] += int(rep)
-                except ValueError:
-                    break
-
-        ans = []
-        for key in sdict:
-            ans.append(f"{sdict[key]} {key}")
-        return ans
-
-
+            rep, domain = s.split()
+            rep = int(rep)
             
+            parts = domain.split('.')
+            for i in range(len(parts)):
+                sub = '.'.join(parts[i:])
+                sdict[sub] += rep
+                
+        return [f"{count} {dom}" for dom, count in sdict.items()]
