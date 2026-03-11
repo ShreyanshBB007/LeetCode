@@ -4,7 +4,7 @@ public:
         if (n == 0) {
             return 1;
         }
-        
+
         int temp = n;
         string str = "";
 
@@ -13,22 +13,13 @@ public:
             temp /= 2;
             str += to_string(rem);
         }
-
+        
         reverse(str.begin(), str.end());
-        string rev = "";
-
-        for (char c : str) {
-            if (c == '0') {
-                rev += '1';
-            } else
-                rev += '0';
-        }
-
         int ans = 0;
         int t = 0;
 
-        for(int i = rev.size()-1; i>= 0; i--) {
-            if(rev[i]-'0' == 1){
+        for(int i = str.size()-1; i>= 0; i--) {
+            if(str[i] == '0'){
                 ans += pow(2,t);
             }
             t++;
