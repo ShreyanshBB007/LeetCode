@@ -4,11 +4,10 @@ public:
         if (n == 0) {
             return 1;
         }
-        int temp = n;
         string str = "";
-        while (temp > 0) {
-            int rem = temp % 2;
-            temp /= 2;
+        while (n > 0) {
+            int rem = n % 2;
+            n /= 2;
             str += to_string(rem);
         }
         int ans = 0;
