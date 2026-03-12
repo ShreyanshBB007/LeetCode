@@ -8,7 +8,6 @@ public:
             int h = min(height[i],height[j]);
             int w = j - i;
             area = max(area, h*w);
-            cout << area<<endl;
             if(height[i]>height[j]){
                 j--;
             }
