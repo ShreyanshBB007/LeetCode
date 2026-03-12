@@ -5,12 +5,8 @@ public:
         int j = height.size() - 1;
         int area = INT_MIN;
         while(i < height.size() && i < j){
-            int h = min(height[i],height[j]);
-            int w = j - i;
-            area = max(area, h*w);
-            if(height[i]>height[j]){
-                j--;
-            }
+            area = max(area, (min(height[i], height[j])) * (j - i));
+            if(height[i]>height[j]) j--;
             else i++;
         }
         return area;
