@@ -2,12 +2,12 @@ class Solution {
 public:
     int getcount(vector<vector<int>>& matrix, int k){
         int count = 0;
-        for(int i = 0; i < matrix.size(); i++){
-            for(int j = 0; j < matrix[0].size(); j++){
-                if(matrix[i][j]<=k){
-                    count++;
-                }
-            }        
+        int c = matrix[0].size() - 1;
+        for(int r = 0; r < matrix.size(); r++){
+            while(c>=0 && matrix[r][c] > k){
+                c--;
+            }
+            count += c + 1;
         }
         return count;
     }
