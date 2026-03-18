@@ -1,22 +1,28 @@
 class Solution {
 public:
     vector<int> arrayRankTransform(vector<int>& arr) {
-        vector<int> ans;
-        if(arr.size() == 0){
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        int n = arr.size();
+        vector<int> ans(n,0);
+        if(n == 0){
+            ans = {};
             return ans;
         }
-        vector<int> vec = arr;
-        sort(vec.begin(), vec.end());
-        map<int, int> mpp;
-        mpp[vec[0]] = 1;
-        for(int i = 1; i < arr.size(); i++){
-            if(vec[i] > vec[i-1]){
-                mpp[vec[i]] = mpp[vec[i-1]] + 1;
-            }
-            else mpp[vec[i]] = mpp[vec[i-1]];
+        for(int i = 0; i < n; i++){
+            pq.push({arr[i],i});
         }
-        for(int i : arr){
-            ans.push_back(mpp[i]);
+        int rank = 0;
+        int prev = INT_MIN;
+        while(!pq.empty()){
+            auto top = pq.top();
+            int val = top.first;
+            int ind = top.second;
+            if(val != prev){
+                rank++;
+                prev = val;
+            }
+            ans[ind] = rank;
+            pq.pop();
         }
         return ans;
     }
