@@ -10,7 +10,7 @@ public:
     }
     int minMirrorPairDistance(vector<int>& nums) {
         unordered_map<int, int> mpp;
-        int n = nums.size(), ans = 1e6;
+        int n = nums.size(), ans = INT_MAX;
 
         for (int i = 0; i < n; i++) {
             if (mpp.count(nums[i])) {
@@ -18,6 +18,6 @@ public:
             }
             mpp[getreverse(nums[i])] = i;
         }
-        return ans == 1e6 ? -1 : ans;
+        return ans == INT_MAX ? -1 : ans;
     }
 };
