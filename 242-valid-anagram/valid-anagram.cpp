@@ -1,18 +1,14 @@
 class Solution {
 public:
-    bool isAnagram(string s, string t) {
-        if(s.size()!=t.size()){
-            return false;
-        }
-        unordered_map<char, int> mpp;
-        for(int i = 0; i < s.size(); i++){
-            mpp[s[i]]++;
-            mpp[t[i]]--;
-        }
-        for(auto const& [x, y] : mpp){
-            if(y != 0){
-                return false;
-            }
+    bool isAnagram(std::string s, std::string t) {
+        if (s.size() != t.size()) return false;
+        
+        int freq[26] = {}; 
+        for (char c : s) freq[c - 'a']++;
+        for (char c : t) freq[c - 'a']--;
+        
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] != 0) return false;
         }
         return true;
     }
