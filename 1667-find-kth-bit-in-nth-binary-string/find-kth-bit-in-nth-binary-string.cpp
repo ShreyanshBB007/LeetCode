@@ -1,26 +1,15 @@
 class Solution {
 public:
-    string invert(string s){
-        for(int i = 0; i < s.size(); i++){
-            if(s[i]=='0'){
-                s[i]='1';
-            }
-            else s[i] = '0';
-        }
-        return s;
-    }
-
-    string computeS(int n){
-        if(n==1){
-            return "0";
-        }
-        string prev = computeS(n-1);
-        string invs = invert(prev);
-        reverse(invs.begin(), invs.end());
-        return (prev + "1" + invs);
-    }
     char findKthBit(int n, int k) {
-        string str = computeS(n);
-        return str[k-1];
+        if (n == 1)
+            return '0';
+        int half = ((1 << n) - 1) / 2;
+        cout << half << endl;
+        if (half + 1 == k)
+            return '1';
+        else if (k <= half)
+            return findKthBit(n - 1, k);
+        else
+            return findKthBit(n - 1, half + 1 - (k - half - 1)) == '1' ? '0' : '1';
     }
 };
